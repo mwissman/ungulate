@@ -6,7 +6,12 @@ namespace Ungulate
     {
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+            builder.RegisterType<FooMiddleWare>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<Thing>()
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
         }
     }
 }

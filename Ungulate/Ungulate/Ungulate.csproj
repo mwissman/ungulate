@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FooMiddleWare.cs" />
+    <Compile Include="HttpStubMiddleWare.cs" />
     <Compile Include="IThing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

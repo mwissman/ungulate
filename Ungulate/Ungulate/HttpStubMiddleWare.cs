@@ -3,11 +3,11 @@ using Microsoft.Owin;
 
 namespace Ungulate
 {
-    public class FooMiddleWare: OwinMiddleware
+    public class HttpStubMiddleWare: OwinMiddleware
     {
         private readonly IThing _thing;
 
-        public FooMiddleWare(OwinMiddleware next, IThing thing) : base(next)
+        public HttpStubMiddleWare(OwinMiddleware next, IThing thing) : base(next)
         {
             _thing = thing;
         }
@@ -19,6 +19,8 @@ namespace Ungulate
             context.Response.Write("path:"+path);
             context.Response.Write("Uri:"+context.Request.Uri.ToString());
             context.Response.Write("thing: "+_thing.Stuff());
+           // context.Response.
+
 
             await Next.Invoke(context);
         }

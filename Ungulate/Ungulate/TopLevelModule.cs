@@ -6,7 +6,7 @@ namespace Ungulate
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<FooMiddleWare>()
+            builder.RegisterType<HttpStubMiddleWare>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<Thing>()

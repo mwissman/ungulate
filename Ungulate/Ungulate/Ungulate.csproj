@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Application\AbstractHandler.cs" />
     <Compile Include="Application\HttpResponseBuilder.cs" />
+    <Compile Include="Application\HttpResponseFactory.cs" />
     <Compile Include="Application\IHttpResponse.cs" />
     <Compile Include="Application\IHttpResponseBuilder.cs" />
     <Compile Include="Application\IMatcher.cs" />

@@ -12,7 +12,7 @@ namespace Ungulate
             builder.RegisterType<HttpStubMiddleWare>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new HttpResponseBuilder(c.Resolve<IMappingRepository>(), c.Resolve<IRequestHandlerBuilder>()))
+            builder.Register(c => new HttpResponseBuilder(c.Resolve<IMappingRepository>(), c.Resolve<IRequestHandlerBuilder>(), c.Resolve<IHttpResponseFactory>()))
                 .InstancePerLifetimeScope()
                 .As<IHttpResponseBuilder>();
 
@@ -30,6 +30,10 @@ namespace Ungulate
 
             builder.Register(c => new MatcherBuilder())
                 .As<IMatcherBuilder>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new HttpResponseFactory())
+                .As<IHttpResponseFactory>()
                 .InstancePerLifetimeScope();
         }
     }

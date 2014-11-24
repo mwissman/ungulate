@@ -8,11 +8,13 @@ namespace Ungulate.Application
     {
         private readonly IMappingRepository _mappingRepository;
         private readonly IRequestHandlerBuilder _requestHandler;
+        private readonly IHttpResponseFactory _responseFactory;
 
-        public HttpResponseBuilder(IMappingRepository mappingRepository, IRequestHandlerBuilder requestHandler)
+        public HttpResponseBuilder(IMappingRepository mappingRepository, IRequestHandlerBuilder requestHandler, IHttpResponseFactory responseFactory)
         {
             _mappingRepository = mappingRepository;
             _requestHandler = requestHandler;
+            _responseFactory = responseFactory;
         }
 
         public IHttpResponse Build(IOwinRequest context)
@@ -21,9 +23,14 @@ namespace Ungulate.Application
 
             var handler = _requestHandler.Create(mappings);
 
-            var httpResponse =handler.Process(context);
+            var mapping =handler.Process(context);
 
-            throw new NotImplementedException();
+            return _responseFactory.Create(mapping);
         }
+    }
+
+    public interface IHttpResponseFactory
+    {
+        IHttpResponse Create(Mapping mapping);
     }
 }

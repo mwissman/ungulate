@@ -5,22 +5,18 @@ namespace Ungulate
 {
     public class HttpStubMiddleWare: OwinMiddleware
     {
-        private readonly IThing _thing;
+        private readonly IHttpResponseBuilder _httpResponseBuilder;
 
-        public HttpStubMiddleWare(OwinMiddleware next, IThing thing) : base(next)
+        public HttpStubMiddleWare(OwinMiddleware next, IHttpResponseBuilder httpResponseBuilder) : base(next)
         {
-            _thing = thing;
+            _httpResponseBuilder = httpResponseBuilder;
         }
 
         public async override Task Invoke(IOwinContext context)
         {
-            var path = context.Request.Path;
+            var response = _httpResponseBuilder.Build(context.Request);
 
-            context.Response.Write("path:"+path);
-            context.Response.Write("Uri:"+context.Request.Uri.ToString());
-            context.Response.Write("thing: "+_thing.Stuff());
-           // context.Response.
-
+            response.ApplyTo(context.Response);
 
             await Next.Invoke(context);
         }

@@ -9,7 +9,7 @@ namespace Ungulate
             builder.RegisterType<HttpStubMiddleWare>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<Thing>()
+            builder.RegisterType<HttpResponseBuilder>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
         }

@@ -5,6 +5,6 @@ namespace Ungulate.Application
 {
     public interface IRequestHandler
     {
-        Response Process(IOwinRequest context);
+        Mapping Process(IOwinRequest context);
     }
 }

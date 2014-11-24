@@ -12,7 +12,7 @@ namespace Ungulate.Application
             _successor = successor;
         }
 
-        public abstract Response Process(IOwinRequest context);
+        public abstract Mapping Process(IOwinRequest context);
     
     }
 }

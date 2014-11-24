@@ -14,18 +14,18 @@ namespace Ungulate.Application
             _matcherBuilder = matcherBuilder;
         }
 
-        public override Response Process(IOwinRequest context)
+        public override Mapping Process(IOwinRequest context)
         {
             var matcher = _matcherBuilder.CreateFrom(_mapping);
             if (matcher.DoesMatch(context))
             {
-                return _mapping.Response;
+                return _mapping;
             }
-            else if (_successor != null)
+            if (_successor != null)
             {
                 _successor.Process(context);
             }
-            return new EmptyResponse();
+            return new EmptyMapping();
         }
     }
 }

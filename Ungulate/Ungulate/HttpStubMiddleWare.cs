@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Owin;
+using Ungulate.Application;
 
 namespace Ungulate
 {

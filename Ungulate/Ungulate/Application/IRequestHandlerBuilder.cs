@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ungulate.Domain;
 
-namespace Ungulate
+namespace Ungulate.Application
 {
     public interface IRequestHandlerBuilder
     {

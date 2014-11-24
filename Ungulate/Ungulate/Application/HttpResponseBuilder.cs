@@ -2,7 +2,7 @@
 using Microsoft.Owin;
 using Ungulate.Domain;
 
-namespace Ungulate
+namespace Ungulate.Application
 {
     public class HttpResponseBuilder : IHttpResponseBuilder
     {

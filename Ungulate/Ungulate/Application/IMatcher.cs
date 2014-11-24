@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin;
 
-namespace Ungulate
+namespace Ungulate.Application
 {
     public interface IMatcher
     {

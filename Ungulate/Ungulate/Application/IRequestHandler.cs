@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Ungulate.Domain;
 
-namespace Ungulate
+namespace Ungulate.Application
 {
     public interface IRequestHandler
     {

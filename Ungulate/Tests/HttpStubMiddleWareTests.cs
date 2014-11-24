@@ -7,6 +7,7 @@ using Microsoft.Owin;
 using Moq;
 using NUnit.Framework;
 using Ungulate;
+using Ungulate.Application;
 
 namespace Tests
 {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.Owin;
 using Ungulate.Domain;
 
-namespace Ungulate
+namespace Ungulate.Application
 {
     public class RequestHandlerBuilder : IRequestHandlerBuilder
     {

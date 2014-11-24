@@ -66,15 +66,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\AbstractHandler.cs" />
     <Compile Include="Application\HttpResponseBuilder.cs" />
     <Compile Include="Application\IHttpResponse.cs" />
     <Compile Include="Application\IHttpResponseBuilder.cs" />
     <Compile Include="Application\IMatcher.cs" />
+    <Compile Include="Application\IMatcherBuilder.cs" />
     <Compile Include="Application\IRequestHandler.cs" />
     <Compile Include="Application\IRequestHandlerBuilder.cs" />
     <Compile Include="Application\MappingHandler.cs" />
     <Compile Include="Application\MatcherBuilder.cs" />
     <Compile Include="Application\RequestHandlerBuilder.cs" />
+    <Compile Include="Domain\EmptyResponse.cs" />
     <Compile Include="Domain\IMappingRepository.cs" />
     <Compile Include="Domain\Mapping.cs" />
     <Compile Include="HttpStubMiddleWare.cs" />

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Owin;
 using Ungulate.Domain;
 
 namespace Ungulate.Application
@@ -38,27 +37,5 @@ namespace Ungulate.Application
             return firstHandler;
         }
        
-    }
-
-    public interface IMatcherBuilder
-    {
-        IMatcher CreateFrom(Mapping mapping);
-    }
-
-    public class EmptyResponse : Response
-    {
-    }
-
-    public abstract class AbstractHandler : IRequestHandler
-    {
-        protected IRequestHandler _successor;
-
-        public void SetSuccessor(IRequestHandler successor)
-        {
-            _successor = successor;
-        }
-
-        public abstract Response Process(IOwinRequest context);
-    
     }
 }

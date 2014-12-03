@@ -6,7 +6,8 @@ namespace Ungulate
     {
         public string MappingPath
         {
-            get { throw new NotImplementedException(); }
+            get { return "mapping"; }
+            
         }
     }
 }

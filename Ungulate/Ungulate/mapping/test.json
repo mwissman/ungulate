@@ -1,0 +1,14 @@
+{
+  "request" : {
+    "url" : "/test",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "testBody.json",
+    "headers" : {
+      "date" : "Thu, 21 Aug 2014 15:33:57 UTC",
+      "Connection" : "close"
+    }
+  }
+}

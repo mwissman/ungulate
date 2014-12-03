@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Microsoft.Owin;
 using Ungulate.Domain;
 
@@ -8,11 +10,11 @@ namespace Ungulate.Application
 {
     public class HttpResponseFactory : IHttpResponseFactory
     {
-        public IHttpResponse Create(Mapping mapping)
+        public IHttpResponse Create(Mapping mapping, IOwinRequest context)
         {
             var status = new StatusHttpResponse(mapping);
             var headers = new HeadersHttpResponse(mapping);
-            var body = new BodyHttpResponse(mapping);
+            var body = new BodyHttpResponse(mapping, context);
 
             IList<IHttpResponse> responseAppliers = new List<IHttpResponse>()
             {
@@ -79,15 +81,27 @@ namespace Ungulate.Application
     public class BodyHttpResponse : IHttpResponse
     {
         private readonly Mapping _mapping;
+        private readonly IOwinRequest _context;
 
-        public BodyHttpResponse(Mapping mapping)
+        public BodyHttpResponse(Mapping mapping, IOwinRequest context)
         {
             _mapping = mapping;
+            _context = context;
         }
 
         public void ApplyTo(IOwinResponse owinResponse)
         {
-           throw new NotImplementedException();
+            var bodyText = File.ReadAllText(_mapping.Response.BodyFileName);
+
+            foreach (var parameter in _context.Query)
+            {
+                bodyText = bodyText.Replace("${" + parameter.Key + "}", string.Join(",",parameter.Value));
+            }
+
+            using (TextWriter textWriter = new StreamWriter(owinResponse.Body))
+            {
+                textWriter.Write(bodyText);
+            }
         }
     }
 }

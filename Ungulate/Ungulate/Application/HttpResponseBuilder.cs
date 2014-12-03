@@ -25,12 +25,12 @@ namespace Ungulate.Application
 
             var mapping =handler.Process(context);
 
-            return _responseFactory.Create(mapping);
+            return _responseFactory.Create(mapping, context);
         }
     }
 
     public interface IHttpResponseFactory
     {
-        IHttpResponse Create(Mapping mapping);
+        IHttpResponse Create(Mapping mapping, IOwinRequest context);
     }
 }

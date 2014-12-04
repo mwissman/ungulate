@@ -10,7 +10,7 @@ namespace Ungulate.Domain
 
     public class Request
     {
-        public string UrlPattern { get; set; }
+        public string UrlPathPattern { get; set; }
         public string Method { get; set; }
     }
 
@@ -19,7 +19,6 @@ namespace Ungulate.Domain
         public int Status { get; set; }
         public string BodyFileName { get; set; }
         public string Body { get; set; }
-//        public List<Header> Headers { get; set; }
         public Dictionary<string, string> Headers { get; set; }
     }
 

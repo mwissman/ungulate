@@ -14,16 +14,30 @@ namespace Tests
     [TestFixture]
     public class HttpStubMiddleWareTests
     {
-        private HttpStubMiddleWare _middleware;
         private Mock<IHttpResponseBuilder> _builderMock;
+        private Mock<IHttpResponse> _httpResponse;
+        private Mock<IOwinContext> _contextMock;
+        private Mock<IOwinRequest> _requestMock;
+        private Mock<IOwinResponse> _responseMock;
 
         [SetUp]
         public void Setup()
         {
             _builderMock = new Mock<IHttpResponseBuilder>();
-            
-            OwinMiddleware next=null;
-            _middleware = new HttpStubMiddleWare(next, _builderMock.Object);
+
+            _contextMock = new Mock<IOwinContext>();
+            _requestMock = new Mock<IOwinRequest>();
+            _responseMock = new Mock<IOwinResponse>();
+
+            _contextMock.SetupGet(c => c.Request).Returns(_requestMock.Object);
+            _contextMock.SetupGet(c => c.Response).Returns(_responseMock.Object);
+
+            _httpResponse = new Mock<IHttpResponse>();
+            _builderMock.Setup(b => b.Build(_requestMock.Object)).Returns(_httpResponse.Object);
+
+
+
+          
         }
 
         [TearDown]
@@ -35,19 +49,38 @@ namespace Tests
         [Test]
         public void MiddlewareUsesResponseBuilderToConsturctResponse()
         {
-            var contextMock = new Mock<IOwinContext>();
-            var requestMock = new Mock<IOwinRequest>();
-            var responseMock = new Mock<IOwinResponse>();
+            var middleware = new HttpStubMiddleWare(null, _builderMock.Object);
+  
+            middleware.Invoke(_contextMock.Object).Wait();
 
-            contextMock.SetupGet(c => c.Request).Returns(requestMock.Object);
-            contextMock.SetupGet(c => c.Response).Returns(responseMock.Object);
+            _httpResponse.Verify(r=>r.ApplyTo(_responseMock.Object));
+        }
 
-            var httpResponse=new Mock<IHttpResponse>();
-            _builderMock.Setup(b => b.Build(requestMock.Object)).Returns(httpResponse.Object);
+        [Test]
+        public void CallsNextMiddleware()
+        {
+            var fakeMiddleware = new FakeMiddleWare();
+            var middleware = new HttpStubMiddleWare(fakeMiddleware, _builderMock.Object);
 
-            _middleware.Invoke(contextMock.Object).Wait();
+            middleware.Invoke(_contextMock.Object).Wait();
 
-            httpResponse.Verify(r=>r.ApplyTo(responseMock.Object));
+            _httpResponse.Verify(r => r.ApplyTo(_responseMock.Object));
+            Assert.IsTrue(fakeMiddleware.Invoked);
+        
+        }
+    }
+
+    public class FakeMiddleWare : OwinMiddleware
+    {
+        public bool Invoked=false;
+
+        public FakeMiddleWare() : base(null)
+        {
+        }
+
+        public async override Task Invoke(IOwinContext context)
+        {
+            Invoked = true;
         }
     }
 }

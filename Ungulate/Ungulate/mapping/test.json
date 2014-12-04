@@ -1,6 +1,6 @@
 {
   "Request" : {
-    "UrlPattern" : "/test",
+    "UrlPathPattern" : "/test",
     "Method" : "GET"
   },
   "Response" : {

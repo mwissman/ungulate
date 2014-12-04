@@ -30,7 +30,10 @@ namespace Ungulate
                 context.Response.Body.Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
             }
 
-            await Next.Invoke(context);
+            if (Next != null)
+            {
+                await Next.Invoke(context);
+            }
         }
     }
 }

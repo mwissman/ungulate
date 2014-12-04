@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using System.Text.RegularExpressions;
 using Microsoft.Owin;
 using Ungulate.Domain;
@@ -48,7 +46,7 @@ namespace Ungulate.Application
 
         public bool DoesMatch(IOwinRequest context)
         {
-            return Regex.IsMatch(context.Uri.PathAndQuery, _request.UrlPattern);
+            return Regex.IsMatch(context.Uri.PathAndQuery, _request.UrlPathPattern);
         }
     }
 

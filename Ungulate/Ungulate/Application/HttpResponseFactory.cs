@@ -91,7 +91,11 @@ namespace Ungulate.Application
 
         public void ApplyTo(IOwinResponse owinResponse)
         {
-            var bodyText = File.ReadAllText(_mapping.Response.BodyFileName);
+            var bodyText = _mapping.Response.Body;
+            if (!string.IsNullOrWhiteSpace(_mapping.Response.BodyFileName))
+            {
+                bodyText = File.ReadAllText(Path.Combine("__files", _mapping.Response.BodyFileName));
+            }
 
             foreach (var parameter in _context.Query)
             {

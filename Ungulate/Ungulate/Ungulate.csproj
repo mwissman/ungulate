@@ -95,7 +95,7 @@
     <None Include="mapping\test.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="mapping\testBody.json">
+    <None Include="__files\testBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

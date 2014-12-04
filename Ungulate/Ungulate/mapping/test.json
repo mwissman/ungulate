@@ -1,12 +1,12 @@
 {
-  "request" : {
-    "url" : "/test",
-    "method" : "GET"
+  "Request" : {
+    "UrlPattern" : "/test",
+    "Method" : "GET"
   },
-  "response" : {
-    "status" : 200,
-    "bodyFileName" : "testBody.json",
-    "headers" : {
+  "Response" : {
+    "Status" : 200,
+    "BodyFileName" : "testBody.json",
+    "Headers" : {
       "date" : "Thu, 21 Aug 2014 15:33:57 UTC",
       "Connection" : "close"
     }

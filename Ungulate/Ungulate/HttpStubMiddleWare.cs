@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Owin;
 using Ungulate.Application;
 
@@ -15,9 +17,18 @@ namespace Ungulate
 
         public async override Task Invoke(IOwinContext context)
         {
-            var response = _httpResponseBuilder.Build(context.Request);
+            try
+            {
+                var response = _httpResponseBuilder.Build(context.Request);
 
-            response.ApplyTo(context.Response);
+                response.ApplyTo(context.Response);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                string message = e.ToString();
+                context.Response.Body.Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
+            }
 
             await Next.Invoke(context);
         }

@@ -18,7 +18,9 @@ namespace Ungulate.Domain
     {
         public int Status { get; set; }
         public string BodyFileName { get; set; }
-        public List<Header> Headers { get; set; }
+        public string Body { get; set; }
+//        public List<Header> Headers { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 
     public class Header

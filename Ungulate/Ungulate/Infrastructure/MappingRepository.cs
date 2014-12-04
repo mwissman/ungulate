@@ -17,11 +17,22 @@ namespace Ungulate.Infrastructure
 
         public IList<Mapping> All()
         {
-            var files = Directory.GetFiles(_settings.MappingPath, "*.json")
-                .Select(File.ReadAllText)
-                .Select(JsonConvert.DeserializeObject<Mapping>)
+            string[] strings = Directory.GetFiles(_settings.MappingPath, "*.json");
+            var files = strings
+                .Select(s => ReadAllText(s))
+                .Select(s=> DeserializeObject(s))
                 .ToList();
             return files;
+        }
+
+        private static Mapping DeserializeObject(string s)
+        {
+            return JsonConvert.DeserializeObject<Mapping>(s);
+        }
+
+        private static string ReadAllText(string s)
+        {
+            return File.ReadAllText(s);
         }
     }
 }

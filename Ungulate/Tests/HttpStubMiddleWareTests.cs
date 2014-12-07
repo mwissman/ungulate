@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Owin;
 using Moq;
 using NUnit.Framework;
@@ -33,17 +29,7 @@ namespace Tests
             _contextMock.SetupGet(c => c.Response).Returns(_responseMock.Object);
 
             _httpResponse = new Mock<IHttpResponse>();
-            _builderMock.Setup(b => b.Build(_requestMock.Object)).Returns(_httpResponse.Object);
-
-
-
-          
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            
+            _builderMock.Setup(b => b.Build(_requestMock.Object)).Returns(_httpResponse.Object); 
         }
 
         [Test]

@@ -71,6 +71,7 @@
     <Compile Include="Application\HttpResponseFactory.cs" />
     <Compile Include="Application\IHttpResponse.cs" />
     <Compile Include="Application\IHttpResponseBuilder.cs" />
+    <Compile Include="Application\IHttpResponseFactory.cs" />
     <Compile Include="Application\IMatcher.cs" />
     <Compile Include="Application\IMatcherBuilder.cs" />
     <Compile Include="Application\IRequestHandler.cs" />

@@ -19,18 +19,13 @@ namespace Ungulate.Application
 
         public IHttpResponse Build(IOwinRequest context)
         {
-            var mappings=_mappingRepository.All();
+            var mappings = _mappingRepository.All();
 
             var handler = _requestHandler.Create(mappings);
 
-            var mapping =handler.Process(context);
+            var mapping = handler.Process(context);
 
             return _responseFactory.Create(mapping, context);
         }
-    }
-
-    public interface IHttpResponseFactory
-    {
-        IHttpResponse Create(Mapping mapping, IOwinRequest context);
     }
 }
